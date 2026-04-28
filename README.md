@@ -1,36 +1,48 @@
-# Minimum Viable Product (MVP) Documentation
+# GetFueled — Solana Lending Protocol
 
-## Architecture Overview
-The MVP is designed using a microservices architecture, allowing for independent deployment and scaling of services. Key components include:
-- **API Gateway**: Manages requests and routing to appropriate services.
-- **Service A**: Handles user authentication and management.
-- **Service B**: Manages data storage and retrieval.
-- **Service C**: Provides business logic and processing.
+A decentralized lending protocol on Solana where lenders earn yield and borrowers can take loans using SOL as collateral.
 
-## Technical Specs
-- **Languages**: JavaScript, Python
-- **Frameworks**: Express.js, Flask
-- **Database**: MongoDB, PostgreSQL
-- **Deployment**: Docker, Kubernetes
-- **Version Control**: Git, GitHub
+## 🚀 How It Works
 
-## Development Roadmap
-1. **Phase 1**: Initial Setup
-   - Set up repository structure
-   - Establish CI/CD pipelines
+Lenders deposit SOL → Earn 5% APR
+Borrowers lock collateral → Pay 8% APR
+Protocol keeps 3% spread (profit)
 
-2. **Phase 2**: Core Features
-   - Implement user authentication
-   - Create basic data CRUD operations
+## 🏦 Features
 
-3. **Phase 3**: Enhancements
-   - Add logging and monitoring
-   - Improve API documentation
+- Lend SOL – Deposit SOL, earn passive yield (5% APR)
+- Borrow SOL – Lock collateral, borrow up to 80% LTV
+- Liquidations – Automatic when health factor below 1.0
+- Real-time prices – Pyth oracle integration (mainnet ready)
 
-4. **Phase 4**: Testing & Deployment
-   - Conduct manual and automated testing
-   - Deploy to production environment
+## 📊 Interest Rates
 
-5. **Phase 5**: Future Improvements
-   - Explore performance optimizations
-   - Gather user feedback and iterate accordingly.
+| Role | APR |
+|------|-----|
+| Lender | 5% |
+| Borrower | 8% |
+| Protocol | 3% (spread revenue) |
+
+## 🛠 Tech Stack
+
+- Smart Contract: Anchor (Rust)
+- Blockchain: Solana
+- Oracle: Pyth Network
+- Frontend: React + TypeScript
+- Wallet: Privy / Phantom
+
+## 🔧 Instructions
+
+| Instruction | Description |
+|-------------|-------------|
+| initialize_pool | Create global lending pool |
+| lend | Deposit SOL, earn yield |
+| borrow | Lock collateral, borrow SOL |
+| repay | Return SOL + interest |
+| liquidate | Liquidate underwater positions (5% bonus) |
+
+## 📈 Pyth Oracle Integration
+
+```rust
+let price_feed = load_price_feed_from_account_info(&pyth_account)?;
+let current_price = price_feed.get_price_no_older_than(clock, 60)?;
