@@ -1,0 +1,12 @@
+[package]
+name = "credit-injection"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anchor-lang = "0.30"
+anchor-spl = "0.30"
+pyth-sdk-solana = "0.8"
+
+[lib]
+crate-type = ["cdylib", "lib"]
